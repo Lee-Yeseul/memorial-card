@@ -14,63 +14,46 @@ export default function Home() {
     departure: '',
     burial: '',
   })
-
   const [selectedTemplate, setSelectedTemplate] = useState('T03')
 
   return (
-    <div className="min-h-screen bg-[#f8f9fa] selection:bg-black selection:text-white">
+    <div className="min-h-screen bg-zinc-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-black rounded-lg flex items-center justify-center">
-              <span className="text-white text-xl">訃</span>
+      <header className="bg-white border-b border-zinc-200 sticky top-0 z-50 backdrop-blur">
+        <div className="max-w-screen-xl mx-auto px-6 h-14 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-7 h-7 bg-zinc-900 rounded-lg flex items-center justify-center shrink-0">
+              <span className="text-white text-[13px] font-bold">訃</span>
             </div>
-            <h1 className="text-xl font-bold tracking-tight">부고장 생성기</h1>
+            <span className="font-bold text-zinc-900 text-[15px] tracking-tight">부고장 생성기</span>
           </div>
-          <p className="text-xs text-gray-400 hidden sm:block">
-            삼가 고인의 명복을 빕니다.
-          </p>
+          <span className="text-xs text-zinc-400 hidden sm:block">삼가 고인의 명복을 빕니다</span>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-8">
-        <div className="flex flex-col lg:flex-row gap-8 items-start">
-          {/* Left: Form */}
-          <div className="w-full lg:w-[400px] lg:sticky lg:top-24">
+      <main className="max-w-screen-xl mx-auto px-6 py-6">
+        <div className="flex flex-col xl:flex-row gap-6 items-start">
+          {/* Left: Form + Template picker */}
+          <div className="w-full xl:w-[440px] shrink-0 flex flex-col gap-4">
             <FormPanel data={data} onChange={setData} />
+            <div className="bg-white rounded-2xl border border-zinc-100 shadow-sm p-5">
+              <p className="text-[11px] font-bold text-zinc-300 uppercase tracking-widest mb-4">
+                템플릿 선택
+              </p>
+              <TemplateGrid selectedId={selectedTemplate} onSelect={setSelectedTemplate} />
+            </div>
           </div>
 
-          {/* Right: Template Selection & Preview */}
-          <div className="flex-1 w-full">
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
-                <span className="w-2 h-5 bg-gray-200 rounded-full"></span>
-                템플릿 선택
-              </h2>
-              <TemplateGrid 
-                selectedId={selectedTemplate} 
-                onSelect={setSelectedTemplate} 
-              />
-              
-              <div className="border-t pt-8 mt-4">
-                <h2 className="text-lg font-bold mb-6 flex items-center gap-2">
-                  <span className="w-2 h-5 bg-gray-200 rounded-full"></span>
-                  실시간 미리보기
-                </h2>
-                <PreviewPanel 
-                  data={data} 
-                  templateId={selectedTemplate} 
-                />
-              </div>
-            </div>
-            
-            <footer className="mt-8 text-center text-gray-400 text-sm pb-12">
-              © 2024 Memorial Card Generator. All rights reserved.
-            </footer>
+          {/* Right: Preview (sticky) */}
+          <div className="flex-1 min-w-0 w-full xl:sticky xl:top-20">
+            <PreviewPanel data={data} templateId={selectedTemplate} />
           </div>
         </div>
       </main>
+
+      <footer className="text-center text-[11px] text-zinc-400 py-10">
+        © 2026 부고장 생성기 · 삼가 고인의 명복을 빕니다
+      </footer>
     </div>
   )
 }
