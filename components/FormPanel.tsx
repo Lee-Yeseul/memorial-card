@@ -15,7 +15,8 @@ interface Props {
   onChange: (data: MemorialData) => void
 }
 
-const input = 'w-full px-3.5 py-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:border-transparent transition-all placeholder:text-zinc-300'
+const inputBase = 'px-3.5 py-2.5 text-sm bg-zinc-50 border border-zinc-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-zinc-800 focus:border-transparent transition-all placeholder:text-zinc-300'
+const input = 'w-full ' + inputBase
 
 function Label({ children }: { children: React.ReactNode }) {
   return <label className="block text-[12px] font-semibold text-zinc-500 uppercase tracking-wider mb-1.5">{children}</label>
@@ -175,13 +176,13 @@ export default function FormPanel({ data, onChange }: Props) {
                 placeholder="관계 (장남)"
                 value={m.role}
                 onChange={e => updateMourner(i, 'role', e.target.value)}
-                className={input + ' w-2/5'}
+                className={inputBase + ' w-2/5 min-w-0'}
               />
               <input
                 placeholder="성함"
                 value={m.name}
                 onChange={e => updateMourner(i, 'name', e.target.value)}
-                className={input + ' flex-1'}
+                className={inputBase + ' flex-1 min-w-0'}
               />
               <button
                 onClick={() => removeMourner(i)}
